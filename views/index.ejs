@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+	<title></title>
+		<link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css'>
+
+	<link rel='stylesheet' href='/style.css'>
+	<style type="text/css">
+	
+</style>
+</head>
+
+<body>
+
+<input name='myfile', type='file', id='myfile' accept=".csv">
+<input type="hidden" id="numrow">
+<form action="/csv/add" method="post">
+<div id="map-columns">
+	
+<table id="table1" class="text-center">
+<thead>
+	 <tr id="thead">
+ </tr>
+</thead>
+
+  <tbody>
+  <tr id="copyfirst"></tr>
+  <tr id="first"></tr>
+  <tr id="second"></tr>
+  <tr id="third"></tr>
+  <tr id="fourth"></tr>
+ </tbody>
+</table>
+
+
+<p id="buttonCount"></p>
+
+</div>
+
+<footer>
+
+
+
+</footer>
+</form>
+
+		<script src='/bower_components/jquery/dist/jquery.js'></script>
+		<script src='/bower_components/bootstrap/dist/js/bootstrap.js'></script>
+		<script>
+
+   $( document ).ajaxComplete(function( event, request, settings ) {
+     	var filledInputs = $(':input').filter(function() {return !!this.value;}).length
+     		if (filledInputs>2) {
+     			$("#finish").prop('disabled', false);
+     		}
+     		//alert(filledInputs)
+
+		$("th .save").hide();
+     	$("th .okey").hide();
+		$(".th0 .save").show();
+     	$(".th0 .okey").show();
+
+   $(".okey").click(function(){
+   	var pos = $('input', this).attr('value');
+   	//alert(filledInputs)
+	//var numberrow= parseInt(document.getElementById('numrow').value);
+        //$("#dob"+"0").prop('type', 'date');
+     	$(".th"+pos+" .save").hide();
+     	$(".th"+pos+" .okey").hide();
+        $("#accepted"+pos).css({"visibility":"hidden"});
+
+        $("#dob"+pos).hide();
+
+     	$("#skipped"+pos).css({"visibility":"visible"});
+     	$(".td"+pos).css({"background":"#fbe3e4"});
+     	$("#copyfirst .td"+pos).css({"background":"#ee836e"});
+     	$(".td"+pos).css({"border-color":"#ee836e"});
+     	$(".th"+pos).css({"border-color":"#ee836e"});
+     	$("#dob"+pos).prop('value', '');
+     	pos++;
+     	$("#dob"+pos).show();
+     	$("#dob"+pos).prop('readonly', false);
+     	$("#dob"+pos).focus();
+     	$(".th"+pos+" .save").show();
+     	$(".th"+pos+" .okey").show();
+
+		//$("#numrow").prop('value', numberrow-1);
+     	//var filledInputs = $(':input').filter(function() {return !!this.value;}).length
+
+	
+    	
+
+  });
+
+   $(".save").click(function(){
+   	var pos = $('input', this).attr('value');
+   		$(".th"+pos+" .save").hide();
+     	$(".th"+pos+" .okey").hide();
+        $("#skipped"+pos).css({"visibility":"hidden"});
+   	//var numberrow= parseInt(document.getElementById('numrow').value);
+        //$("#dob"+"0").prop('type', 'date');
+        $("#dob"+pos).hide();
+        //$(this).hide();
+        $("#accepted"+pos).css({"visibility":"visible"});
+
+     	$(".td"+pos).css({"background":"#b1e0ec"});
+     	$("#copyfirst .td"+pos).css({"background":"#52bad5"});
+     	$(".td"+pos).css({"border-color":"#52bad5"});
+     	$(".th"+pos).css({"border-color":"#52bad5"});
+     	pos++;
+     	$("#dob"+pos).show();
+     	$("#dob"+pos).prop('readonly', false);
+     	$("#dob"+pos).focus();
+     	
+     	$(".th"+pos+" .save").show();
+     	$(".th"+pos+" .okey").show();
+     	//$("#numrow").prop('value', numberrow-1);
+     	//if (numberrow === 1  && filledInputs>2) {
+     	//$("#finish").prop('disabled', false);
+     	//}
+
+
+  });
+
+
+     	$("#dob0").prop('readonly', false);
+     	$("#dob0").focus();
+
+	$('.enableinput').click( function() {
+   		var pos = parseInt($('input', this).attr('value'));
+   		var posuiv = pos+1;
+   		$(".save").hide();
+     	$(".okey").hide();
+     	$("#dob"+posuiv).prop('readonly', true);
+        $(".th"+pos+" .save").show();
+     	$(".th"+pos+" .okey").show();
+     	$("#dob"+pos).show();
+        $("#accepted"+pos).css({"visibility":"hidden"});
+        $("#skipped"+pos).css({"visibility":"hidden"});
+
+	});
+
+
+});
+
+</script>
+<script src="/socket.io.js"></script>
+<script src="/main.js"></script>
+</body>
+</html>
