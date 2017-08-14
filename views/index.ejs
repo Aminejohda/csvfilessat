@@ -14,7 +14,6 @@
 <body>
 
 <input name='myfile', type='file', id='myfile' accept=".csv">
-<input type="hidden" id="numrow">
 <form action="/csv/add" method="post">
 <div id="map-columns">
 	
@@ -34,8 +33,6 @@
 </table>
 
 
-<p id="buttonCount"></p>
-
 </div>
 
 <footer>
@@ -50,22 +47,13 @@
 		<script>
 
    $( document ).ajaxComplete(function( event, request, settings ) {
-     	var filledInputs = $(':input').filter(function() {return !!this.value;}).length
-     		if (filledInputs>2) {
-     			$("#finish").prop('disabled', false);
-     		}
-     		//alert(filledInputs)
-
-		$("th .save").hide();
-     	$("th .okey").hide();
+     	$("#dob0").prop('readonly', false);
+     	$("#dob0").focus();
 		$(".th0 .save").show();
      	$(".th0 .okey").show();
-
    $(".okey").click(function(){
    	var pos = $('input', this).attr('value');
-   	//alert(filledInputs)
-	//var numberrow= parseInt(document.getElementById('numrow').value);
-        //$("#dob"+"0").prop('type', 'date');
+   	var namehead
      	$(".th"+pos+" .save").hide();
      	$(".th"+pos+" .okey").hide();
         $("#accepted"+pos).css({"visibility":"hidden"});
@@ -78,66 +66,107 @@
      	$(".td"+pos).css({"border-color":"#ee836e"});
      	$(".th"+pos).css({"border-color":"#ee836e"});
      	$("#dob"+pos).prop('value', '');
+     	  	
      	pos++;
+     	$(".th"+pos+" .save").show();
+     	$(".th"+pos+" .okey").show();
+     		$("#copyfirst .td"+pos).each(function(){
+   			namehead = $(this).html();
+		});
+     	if($("#dob"+pos).val()===''){
+			$("#dob"+pos).val(namehead)
+		}
      	$("#dob"+pos).show();
      	$("#dob"+pos).prop('readonly', false);
      	$("#dob"+pos).focus();
-     	$(".th"+pos+" .save").show();
-     	$(".th"+pos+" .okey").show();
-
-		//$("#numrow").prop('value', numberrow-1);
-     	//var filledInputs = $(':input').filter(function() {return !!this.value;}).length
-
+     	var filledInputs = $('input').length;
+     	var hiddeninput = $('input:hidden').length;
+     	//alert(hiddeninput +"  " +filledInputs)
+		if (filledInputs === hiddeninput) {
+     			$("#finish").prop('disabled', false);
+     		}
 	
     	
 
   });
 
    $(".save").click(function(){
+   	var namehead
+
+
    	var pos = $('input', this).attr('value');
+        var emptydob = $("#dob"+pos).val()
+   	
+   	if(emptydob ===''){
+        	alert('not empty')
+        return
+        };
    		$(".th"+pos+" .save").hide();
      	$(".th"+pos+" .okey").hide();
         $("#skipped"+pos).css({"visibility":"hidden"});
-   	//var numberrow= parseInt(document.getElementById('numrow').value);
-        //$("#dob"+"0").prop('type', 'date');
+       
         $("#dob"+pos).hide();
-        //$(this).hide();
         $("#accepted"+pos).css({"visibility":"visible"});
-
+          		$("#copyfirst .td"+pos).each(function(){
+   			namehead = $(this).html();
+		});
      	$(".td"+pos).css({"background":"#b1e0ec"});
      	$("#copyfirst .td"+pos).css({"background":"#52bad5"});
      	$(".td"+pos).css({"border-color":"#52bad5"});
      	$(".th"+pos).css({"border-color":"#52bad5"});
+     	 
      	pos++;
+     	     		$("#copyfirst .td"+pos).each(function(){
+   			namehead = $(this).html();
+		});
+     	if($("#dob"+pos).val()===''){
+			$("#dob"+pos).val(namehead)
+		}
      	$("#dob"+pos).show();
      	$("#dob"+pos).prop('readonly', false);
      	$("#dob"+pos).focus();
-     	
      	$(".th"+pos+" .save").show();
      	$(".th"+pos+" .okey").show();
-     	//$("#numrow").prop('value', numberrow-1);
-     	//if (numberrow === 1  && filledInputs>2) {
-     	//$("#finish").prop('disabled', false);
-     	//}
+     	var filledInputs = $('input').length;
+     	var hiddeninput = $('input:hidden').length;
+     	//alert(hiddeninput +"  " +filledInputs)
 
+		if (filledInputs === hiddeninput) {
+     			$("#finish").prop('disabled', false);
+     		}
 
   });
 
 
-     	$("#dob0").prop('readonly', false);
-     	$("#dob0").focus();
+
+
+
 
 	$('.enableinput').click( function() {
+		$("#finish").prop('disabled', true);
    		var pos = parseInt($('input', this).attr('value'));
    		var posuiv = pos+1;
-   		$(".save").hide();
-     	$(".okey").hide();
+		var namehead
+		$(".head").prop('readonly', true);
+		$("#dob"+pos).prop('readonly', false);
+			$("#copyfirst .td"+pos).each(function(){
+   			namehead = $(this).html();
+		});
+		if($("#dob"+pos).val()===''){
+			$("#dob"+pos).val(namehead)
+		}
      	$("#dob"+posuiv).prop('readonly', true);
         $(".th"+pos+" .save").show();
      	$(".th"+pos+" .okey").show();
      	$("#dob"+pos).show();
         $("#accepted"+pos).css({"visibility":"hidden"});
         $("#skipped"+pos).css({"visibility":"hidden"});
+     	var filledInputs = $('input').length;
+     	var hiddeninput = $('input:hidden').length;
+     //	alert(hiddeninput +"  " +filledInputs)
+		if (filledInputs === hiddeninput) {
+     			$("#finish").prop('disabled', false);
+     		}
 
 	});
 

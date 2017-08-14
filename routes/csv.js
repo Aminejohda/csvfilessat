@@ -19,7 +19,7 @@ function parcih(req,res) {
 	var file =fs.readFileSync(req.file.path)+""
   filename= req.file.originalname;
 
-  console.log(filename)
+  //console.log(filename)
 Baby.parse(file, {
 	download: true,
 	  header: true,
@@ -64,12 +64,13 @@ router.post('/add',function (req,res) {
   var newentete = []
 
   var numberentete = Object.keys(req.body).length;
+  console.log(numberentete)
   //console.log(Object.keys(req.body).length);
   for (var i = 0; i < numberentete; i++) {
     newentete.push(req.param("f"+i))
   }
-  //console.log(newentete)
-  //console.log(entete)
+  console.log(newentete)
+  console.log(entete)
   //-------------------------------------------------------------------------------------------------
   //comparison
 
