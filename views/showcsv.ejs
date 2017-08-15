@@ -1,0 +1,72 @@
+<% include head %>
+<% include header %>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Dashboard
+      <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Dashboard</li>
+    </ol>
+  </section>
+  <section class="content">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-12">
+        <!-- general form elements -->
+     
+ <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Data Table With Full Features</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body map-columns">
+              <table id="example1" class="table table-bordered table-striped">
+              <%   var keys = Object.keys(csvm[1]) %>
+                <thead>
+                <tr>
+			<% for (var i = 1; i < keys.length-1; i++) { -%>
+			<th>
+			<%=	keys[i]	%>
+			</th>
+			<% } -%>
+		</tr>
+                </thead>
+                <tbody>
+                		<% for (var i = 1; i < csvm.length-1; i++) { -%>
+		<tr>
+
+<% for (var j = 1; j < keys.length-1; j++) { -%>
+
+			<td> 
+<%=  csvm[i][keys[j]]%>
+
+			</td>
+
+			<% } -%>
+		</tr>
+
+<% } -%>
+                </tbody>
+                <tfoot>
+                                <tr>
+			<% for (var i = 1; i < keys.length-1; i++) { -%>
+			<th>
+			<%=	keys[i]	%>
+			</th>
+			<% } -%>
+		</tr>
+                  
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div></div></section>
+
+      </div>
+
+<% include footer %>

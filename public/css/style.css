@@ -1,0 +1,58 @@
+
+table {
+   text-align: center;
+   border-spacing: 15px 0;
+   border-collapse: unset;
+
+}
+ td{
+   border-spacing: 0;
+   
+  border-right: 3px solid ;
+  border-left:  3px solid ;
+  border-top:2px dotted ;
+  border-color: #f2f2f2;
+
+}
+#fourth td{
+  border-bottom:  3px solid #f2f2f2 ;
+
+}
+th p {
+	width: 226px;	
+  margin: 0
+}
+th {
+  border :3px solid #f2f2f2;
+}
+#copyfirst td{
+  background: #f2f2f2;
+
+}
+#map-columns{
+  width: 100%;
+    overflow: auto;
+}
+.skip{
+		visibility: hidden;
+		color: red;
+	}
+  .accept{
+    visibility: hidden;
+    color: green;
+
+  }
+  input { 
+    text-align: center; 
+}
+.save, .okey,#finish{
+margin-top: 20px;
+margin-right: 20px;
+margin-left: 5px;
+}
+
+#messages .error{
+  color : #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1
+}
