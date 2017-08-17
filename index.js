@@ -71,10 +71,32 @@ app.use('/users',users)
 app.get('/', ensureAuthentification, function (req,res) {
 
   var userId= req.user._id
+var collectionsname = []
+
      User.findById(userId,function(err,user){
-        res.render('index',{
-          name : user.name
+               mongoose.connection.db.listCollections().toArray(function (err, names) {
+      if (err) {
+        console.log(err);
+      } else {
+        for (var i = 0; i < names.length; i++) {
+          if (names[i]['name'].indexOf(userId) !== -1) {
+            var collection = names[i]['name'];
+            var prefix ='satoripop'+userId;
+            collectionsname.push(collection.slice(prefix.length,collection.length))
+          }
+
+        }
+
+      }
+             res.render('index',{
+          name : user.name,
+          collectionsname : collectionsname
         })
+             console.log(collectionsname)
+
+    });
+
+       
           })
 });
 
@@ -123,7 +145,7 @@ if (req.isAuthenticated()) {
   res.redirect('/users/login')
 }
 }
-server.listen(process.env.PORT || 8080,function () {
+server.listen(process.env.PORT || 3000,function () {
 	console.log('welcome');
 	// body...
 });

@@ -15,6 +15,8 @@
 		var file = e.target.files[0];
 		var formData = new FormData();
 		formData.append('myfile', file);
+		 $('#myfile').hide();
+        $(".se-pre-con").show();
 		$.ajax({
 			url:'http://localhost:3000/csv',
 			type:'post',
@@ -22,7 +24,8 @@
 			processData:false,
 			contentType: false,
 			success:function(res){
-        $('#myfile').hide();
+        $(".se-pre-con").hide();
+
 				var result =res.donne
 				var keys = Object.keys(result[1]);
    
