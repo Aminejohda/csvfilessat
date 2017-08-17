@@ -1,5 +1,4 @@
 const express = require('express');
-
 const app = express();
 var server = require('http').createServer(app); 
 const io = require('socket.io').listen(4000);
@@ -18,15 +17,11 @@ const config = require('./config/database')
 mongoose.connect(config.database);
 const db= mongoose.connection;
 let User = require('./model/user')
-
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'public')));
-
-
-
 app.use(session({
   secret: 'keyboard cat',
   resave: true,
@@ -145,7 +140,7 @@ if (req.isAuthenticated()) {
   res.redirect('/users/login')
 }
 }
-server.listen(process.env.PORT || 3000,function () {
+server.listen(process.env.PORT || 8080,function () {
 	console.log('welcome');
 	// body...
 });

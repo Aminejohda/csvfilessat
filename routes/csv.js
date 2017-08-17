@@ -9,13 +9,14 @@ const upload = multer({dest: 'uploads/'})
 const fs = require('fs')
 const router = express.Router()
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/csvfiles');
+const config = require('../config/database')
+
+mongoose.connect(config.database);
 const db= mongoose.connection;
 var entete = []
 var variable
 var filename;
 let User = require('../model/user')
-let CsvM = require('../model/csvfiles')
 
 //function parse
 function parcih(req,res) {
@@ -126,7 +127,6 @@ console.log('sayee')
 
 res.redirect('/csv/show/'+filename)
     } })
-
 //--------------------------------End-Bulk insert into db---------------------------------------------------------------------------------
 
   // for (var i = 0; i < variable.length; ++i) {
@@ -155,15 +155,12 @@ for (var i = 0; i < variable.length; i++) {
 //--------------------------------End-Simple insert into db---------------------------------------------------------------------------------
 
 });
-
-
 router.get('/show/:id', ensureAuthentification, function (req,res) {
   var userId= req.user._id
   console.log(userId)
 collectionsname = []
      User.findById(userId,function(err,user){
       if (err) {throw err}else {
-
 //-----------------------------------find collections names ---------------------------------------------------
          mongoose.connection.db.listCollections().toArray(function (err, names) {
       if (err) {
@@ -177,7 +174,6 @@ collectionsname = []
           }
         }
       }
-
     });
 //-----------------------------------End collections names ---------------------------------------------------
             db.collection('satoripop'+userId+req.params.id).find().toArray( function(err, csvm){
@@ -189,14 +185,8 @@ collectionsname = []
         })
     })
       }
- 
           })
-
-
-
 });
-
-
 function ensureAuthentification(req, res, next){
 if (req.isAuthenticated()) {
   return next();
